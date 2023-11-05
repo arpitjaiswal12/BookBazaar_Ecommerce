@@ -1,15 +1,15 @@
 const express=require("express")
-// const mongoose=require("mongoose");
-// const dotenv=require('dotenv');
+const mongoose=require("mongoose");
+const dotenv=require('dotenv');
 
-// dotenv.config();
+dotenv.config();
 
-// mongoose.connect(process.env.MONGO).then(()=>{
-//     console.log("connection successful") 
-// }).catch(()=>{
-//     console.log(process.env.MONGO)
-//     console.log("Error while connection")
-// })
+mongoose.connect(process.env.MONGO).then(()=>{
+    console.log("connection successful to database") 
+}).catch(()=>{
+    console.log(process.env.MONGO)
+    console.log("Error while connection")
+})
 
  
 const app=express();
