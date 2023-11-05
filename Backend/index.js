@@ -5,7 +5,7 @@ const dotenv=require('dotenv');
 dotenv.config();
 
 mongoose.connect(process.env.MONGO).then(()=>{
-    console.log("connection successful to database") 
+    console.log("connection successful to database!!") 
 }).catch(()=>{
     console.log(process.env.MONGO)
     console.log("Error while connection")
