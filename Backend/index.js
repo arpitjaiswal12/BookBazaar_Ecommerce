@@ -15,8 +15,6 @@ const appRoutes=require("./routes/app_routes.js");
 
 app.use("/api/auth", appRoutes);  
 
-
-
 app.listen(3000,()=>{
     console.log("Server is running at 3000 ")
 })
