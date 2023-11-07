@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import Dropdown from './Dropdown';
 
 export default function Header() {
   return (
@@ -47,6 +48,7 @@ export default function Header() {
     <Link to='/login'>
         <li className=' text-slate-950 hover:underline'> Login</li>
     </Link>
+    <Dropdown/>
   </ul>
   
 </div>

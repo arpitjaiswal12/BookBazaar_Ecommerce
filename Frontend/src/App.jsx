@@ -6,6 +6,7 @@ import SignUp from './pages/SignUp'
 import Profile from './pages/Profile'
 import About from './pages/About'
 import Header from './Components/Header'
+import Dropdown from './Components/Dropdown'
 
 function App() {
 
@@ -16,11 +17,12 @@ function App() {
 
       <Route path='/' element={<Home />} />
       <Route path='/login' element={<Login />}/>
-      <Route path='/sign-up' element={<SignUp />}/>
+      <Route path='/signup' element={<SignUp />}/>
       <Route path='/about' element={<About/>}/>
       <Route path='/profile' element={<Profile />}/>
 
     </Routes>
+    {/* <Dropdown/> */}
     </BrowserRouter>
     
   )

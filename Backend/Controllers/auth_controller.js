@@ -1,6 +1,6 @@
 const User = require("../models/user_model.js")
 const bcryptjs = require("bcryptjs");  // this is used to decrypt the password at database level such that if any one can have unauthorized accesss so it can't view the user password
-// const { errorHandler } = require("../utils/error.js");
+const { errorHandler } = require("../utils/error.js");
 
 
 exports.SignUp = async (req, res) => {
@@ -12,12 +12,12 @@ exports.SignUp = async (req, res) => {
 
         try {
             await newUser.save();
-            res.status(201).json('User Created successfully !')
+            res.status(201).json('User created successfully!');
         } catch (error) {
             next(error)
         }
         
-    } catch (error) {
+    }catch (error) {
         return res.status(500).json({
             error: "Error While Creating User" ,
         });
