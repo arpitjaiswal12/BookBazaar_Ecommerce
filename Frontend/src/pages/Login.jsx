@@ -1,12 +1,18 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 // import OAuth from '../components/OAuth';
+import { useDispatch, useSelector } from 'react-redux';
+import {loginStart,loginSuccess,loginFailure} from "../redux/user/userSlice";
+
 
 export default function Login() {
   const [formData, setFormData] = useState({});
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(null);
+  // const [loading, setLoading] = useState(false);
+  const {loading, error} = useSelector((state) => state.user)
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
 
   const handleChange = (e) => {
@@ -15,13 +21,14 @@ export default function Login() {
       [e.target.id]: e.target.value,
     });
   };
-  console.log(formData)
+  // console.log(formData)
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
+      // setLoading(true);
+      dispatch(loginStart());
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: {
@@ -30,18 +37,21 @@ export default function Login() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
       if (data.success === false) {
-        setLoading(false);
-        setError(data.message);
+        // setLoading(false);
+        // setError(data.message);
+        dispatch(loginFailure(data.message));
         return;
       }
-      setLoading(false);
-      setError(null);
+      // setLoading(false);
+      // setError(null);
+      dispatch(loginSuccess(data));
       navigate('/');
     } catch (error) {
-      setLoading(false);
-      setError(error.message);
+      // setLoading(false);
+      // setError(error.message);
+      dispatch(loginFailure(error.message));
     }
   };
   return (

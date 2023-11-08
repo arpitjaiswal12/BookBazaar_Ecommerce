@@ -31,7 +31,7 @@ exports.Login = async (req, res, next) => {
     const { email, password } = req.body;
     try {
       const validUser = await User.findOne({ email }); // finding email from db
-      if (!validUser) return next(errorHandler(404, 'User not found!')); // is email is valid or not 
+      if (!validUser) return next(errorHandler(404, 'User not found! Please SignUp')); // is email is valid or not 
       const validPassword = bcryptjs.compareSync(password, validUser.password);  //finding the password from db
       if (!validPassword) return next(errorHandler(401, 'Wrong credentials!')); // is password is valid or not 
       const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET); // creating  a token that makes user login for period of time 
