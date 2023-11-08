@@ -7,6 +7,7 @@ import Profile from './pages/Profile'
 import About from './pages/About'
 import Header from './Components/Header'
 import Dropdown from './Components/Dropdown'
+import PrivateRoute from './Components/PrivateRoute'
 
 function App() {
 
@@ -19,7 +20,10 @@ function App() {
       <Route path='/login' element={<Login />}/>
       <Route path='/signup' element={<SignUp />}/>
       <Route path='/about' element={<About/>}/>
+      <Route element={<PrivateRoute/>}>
       <Route path='/profile' element={<Profile />}/>
+      </Route>
+      
 
     </Routes>
     {/* <Dropdown/> */}

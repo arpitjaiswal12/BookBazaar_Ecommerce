@@ -2,8 +2,12 @@ import React from 'react'
 import { FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Dropdown from './Dropdown';
+import { useSelector } from 'react-redux';
 
 export default function Header() {
+
+  const { currentUser } = useSelector((state) => state.user);
+
   return (
 //     <div>
 //         {/* <a href="#" class="bg-purple-600 text-gray-50 hover:bg-purple-700 p-3 px-3 sm:px-5 rounded-full">
@@ -45,9 +49,17 @@ export default function Header() {
         About
       </li>
     </Link>
-    <Link to='/login'>
-        <li className=' text-slate-950 hover:underline'> Login</li>
-    </Link>
+    <Link to='/profile'>
+            {currentUser ? ( // profile image 
+              <img
+                className='rounded-full h-7 w-7 object-cover'
+                src={currentUser.avatar}
+                alt='profile'
+              />
+            ) : (
+              <li className=' text-slate-700 hover:underline'> Login</li>
+            )}
+      </Link>
     <Dropdown/>
   </ul>
   
