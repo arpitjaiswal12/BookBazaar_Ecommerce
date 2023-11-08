@@ -43,4 +43,41 @@ exports.Login = async (req, res, next) => {
     } catch (error) {
       next(error);
     }
-  };
+};
+
+exports.Google = async (req, res, next) => {
+    try {
+      const user = await User.findOne({ email: req.body.email }); // extracting the email of user from request body and save to email object 
+      if (user) { // here user is exist in database i.e already signup
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET); // creating a web token 
+        const { password: pass, ...rest } = user._doc; // securing the passowrd 
+        res
+          .cookie('access_token', token, { httpOnly: true })
+          .status(200)
+          .json(rest);
+      } else { // here user is not exist 
+        const generatedPassword =
+          Math.random().toString(36).slice(-8) +
+          Math.random().toString(36).slice(-8); // creating the random 16 digit password 
+        const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);  // hasing the password to secure it in backend 
+        const newUser = new User({   // creating a new user 
+          username:
+            req.body.name.split(' ').join('').toLowerCase() +
+            Math.random().toString(36).slice(-4), 
+          email: req.body.email,
+          password: hashedPassword,
+          avatar: req.body.photo,
+        });
+        console.log(newUser)
+        await newUser.save(); // saving the user to database 
+        const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+        const { password: pass, ...rest } = newUser._doc;
+        res
+          .cookie('access_token', token, { httpOnly: true })
+          .status(200)
+          .json(rest);
+      }
+    } catch (error) {
+      next(error);
+    }
+};

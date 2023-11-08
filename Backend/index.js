@@ -9,7 +9,7 @@ dbConnect();
 // middleware to parse json request body
 app.use(express.json());
 
-const appRoutes=require("./routes/app_routes.js");
+const appRoutes=require("./routes/auth_route.js");
 
 //mounts (adding/ appending the ) todo API routes :: when user hits the user the bydefault path is atteached with the entered request
 
