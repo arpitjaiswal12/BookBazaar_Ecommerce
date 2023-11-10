@@ -1,10 +1,10 @@
-const User = require("../models/user_model.js")
-const bcryptjs = require("bcryptjs");  // this is used to decrypt the password at database level such that if any one can have unauthorized accesss so it can't view the user password
-const { errorHandler } = require("../utils/error.js");
-const jwt = require("jsonwebtoken");
+import User from "../models/user_model.js"
+import bcryptjs from "bcryptjs"  // this is used to decrypt the password at database level such that if any one can have unauthorized accesss so it can't view the user password
+import { errorHandler } from "../utils/error.js";
+import jwt from "jsonwebtoken";
 
 
-exports.SignUp = async (req, res) => {
+export const SignUp = async (req, res) => {
     console.log(req.body);
     try {
         const {username,email,password}=req.body;
@@ -27,7 +27,7 @@ exports.SignUp = async (req, res) => {
     
 };
 
-exports.Login = async (req, res, next) => {
+export const Login = async (req, res, next) => {
     const { email, password } = req.body;
     try {
       const validUser = await User.findOne({ email }); // finding email from db
@@ -45,7 +45,7 @@ exports.Login = async (req, res, next) => {
     }
 };
 
-exports.Google = async (req, res, next) => {
+export const Google = async (req, res, next) => {
     try {
       const user = await User.findOne({ email: req.body.email }); // extracting the email of user from request body and save to email object 
       if (user) { // here user is exist in database i.e already signup
