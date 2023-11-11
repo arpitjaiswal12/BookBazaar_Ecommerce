@@ -77,7 +77,7 @@ export default function Login() {
 
         <button
           disabled={loading}
-          className='bg-black text-white p-3 rounded-lg uppercase hover:opacity-90 disabled:opacity-80'
+          className='bg-black text-white p-3 font-medium rounded-lg uppercase hover:opacity-90 disabled:opacity-80'
         >
           {loading ? 'Loading...' : 'Get started'}
         </button>

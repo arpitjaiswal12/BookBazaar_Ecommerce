@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import {updateUserStart, updateUserSuccess , updateUserFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure ,signOutUserStart, signOutUserSuccess, signOutUserFailure} from "../redux/user/userSlice.js"
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export default function Profile() {
 
@@ -105,19 +106,25 @@ export default function Profile() {
         />
         <button 
           disabled={loading}
-          className='bg-green-600 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80'
+          className='bg-green-800 text-white font-medium rounded-lg p-3 uppercase hover:opacity-90 disabled:opacity-80'
         >
           {loading ? "Loading..." : "Update" }
         </button>
+        <Link
+          className='bg-red-700 text-white p-3 font-medium rounded-lg uppercase text-center hover:opacity-90'
+          to={'/createbook'}
+        >
+          Add Book
+        </Link>
       </form>
       <div className='flex justify-between mt-5'>
         <span
           onClick={handleDeleteUser}
-          className='text-red-700 cursor-pointer'
+          className='text-red-700 font-medium cursor-pointer'
         >
           Delete account
         </span>
-        <span onClick={handleSignOut} className='text-red-700 cursor-pointer'>
+        <span onClick={handleSignOut} className='text-red-700 font-medium cursor-pointer'>
           Sign out
         </span>
       </div>
