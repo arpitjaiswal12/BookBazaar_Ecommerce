@@ -30,7 +30,7 @@ export default function CreateBook() {
     type:"sell",
     offer:false,
     imageUrls:[],
-    // userRef:"url_reference sharing link "
+    userRef:currentUser._id
   });
 
   const [imageUploadError, setImageUploadError] = useState(false);
@@ -161,7 +161,7 @@ export default function CreateBook() {
         return setError('Discount price must be lower than regular price');
       setLoading(true);
       setError(false);
-      const res = await fetch('/api/add/createbook', {
+      const res = await fetch('/api/book/createbook', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

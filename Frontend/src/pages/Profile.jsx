@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import {updateUserStart, updateUserSuccess , updateUserFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure ,signOutUserStart, signOutUserSuccess, signOutUserFailure} from "../redux/user/userSlice.js"
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react'
 
 export default function Profile() {
 
@@ -10,6 +11,8 @@ export default function Profile() {
   const [formData,setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const dispatch = useDispatch();
+  const [showBooksError, setShowBooksError] = useState(false);
+  const [userBooks, setUserBooks] = useState([]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -68,6 +71,40 @@ export default function Profile() {
       dispatch(deleteUserSuccess(data));
     } catch (error) {
       dispatch(deleteUserFailure(data.message));
+    }
+  };
+
+  const handleShowBooks = async () => {
+    try {
+      setShowBooksError(false);
+      const res = await fetch(`/api/user/books/${currentUser._id}`);
+      const data = await res.json();
+      if (data.success === false) {
+        setShowBooksError(true);
+        return;
+      }
+      setUserBooks(data);
+    } catch (error) {
+      setShowBooksError(true);
+    }
+  };
+
+  const handleBookDelete = async (bookId) => {
+    try {
+      const res = await fetch(`/api/book/delete/${bookId}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
+
+      setUserBooks((prev) =>
+        prev.filter((book) => book._id !== bookId)  //this will filter out the book which is deleted 
+      );
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
@@ -132,6 +169,57 @@ export default function Profile() {
       <p className='text-green-700 mt-5'>
         {updateSuccess ? 'User is updated successfully!' : ''}
       </p>
+      <button
+      onClick={handleShowBooks}
+      type="button"
+      className=" w-full justify-center inline-flex items-center rounded-md bg-yellow-600 p-3 text-sm font-semibold text-white hover:bg-yellow-600/80"
+    >
+      Show My Books
+      <ArrowRight className="ml-2 h-4 w-4" />
+    </button>
+
+
+
+    {userBooks && userBooks.length > 0 && (
+        <div className='flex flex-col gap-4'>
+          <h1 className='text-center mt-7 text-2xl font-semibold'>
+            Your Books
+          </h1>
+          {userBooks.map((book) => (
+            <div
+              key={book._id}
+              className='border rounded-lg p-3 flex justify-between items-center gap-4'
+            >
+              <Link to={`/book/${book._id}`}>
+                <img
+                  src={book.imageUrls[0]}
+                  alt='book cover'
+                  className='h-16 w-16 object-contain'
+                />
+              </Link>
+              <Link
+                className='text-slate-700 font-semibold  hover:underline truncate flex-1'
+                to={`/book/${book._id}`}
+              >
+                <p>{book.bookName}</p>
+              </Link>
+
+              <div className='flex flex-col item-center'>
+                <button
+                  onClick={() => handleBookDelete(book._id)}
+                  className='text-red-700 uppercase'
+                >
+                  Delete
+                </button>
+                <Link /*to={`/updatebook/${book._id}`}*/ >
+                  <button className='text-green-700 uppercase'>Edit</button>
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+     )}
+
   </div>
 );
 

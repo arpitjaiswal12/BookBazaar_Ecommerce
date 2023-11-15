@@ -22,7 +22,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRoute);  
 app.use("/api/user", userRoute);  
-app.use("/api/add", createBookRoute);
+app.use("/api/book", createBookRoute);
 
 app.listen(3000,()=>{
     console.log("Server is running at 3000 ")
