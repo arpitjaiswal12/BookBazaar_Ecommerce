@@ -28,3 +28,24 @@ export const deleteBook = async (req, res, next) => {
     next(error);
   }
 };
+
+export const updateBook = async (req, res, next) => {
+  const book = await Bookdetail.findById(req.params.id);
+  if (!book) {
+    return next(errorHandler(404, 'book not found!'));
+  }
+  if (req.user.id !== book.userRef) {
+    return next(errorHandler(401, 'You can only update your own books!'));
+  }
+
+  try {
+    const updatedBook = await Bookdetail.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.status(200).json(updatedBook);
+  } catch (error) {
+    next(error);
+  }
+};
