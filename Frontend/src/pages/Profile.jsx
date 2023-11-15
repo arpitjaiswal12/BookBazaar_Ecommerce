@@ -219,7 +219,7 @@ export default function Profile() {
                 >
                   Delete
                 </button>
-                <Link /*to={`/updatebook/${book._id}`}*/ >
+                <Link to={`/updatebook/${book._id}`} >
                   <button className='text-green-700 uppercase'>Edit</button>
                 </Link>
               </div>

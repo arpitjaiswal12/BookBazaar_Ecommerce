@@ -9,6 +9,7 @@ import Header from './Components/Header'
 import Dropdown from './Components/Dropdown'
 import PrivateRoute from './Components/PrivateRoute'
 import CreateBook from './pages/CreateBook'
+import UpdateBook from './pages/UpdateBook'
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
       <Route element={<PrivateRoute/>}> {/* this components only render when user is login */}
           <Route path='/profile' element={<Profile />}/>
           <Route path='/createbook' element={<CreateBook/>}/>
+          <Route path='/updatebook/:bookId' element={<UpdateBook/>}/>
       </Route>
       
 

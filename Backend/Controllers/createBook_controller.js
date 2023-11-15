@@ -49,3 +49,15 @@ export const updateBook = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getBook = async (req, res, next) => {
+  try {
+    const book = await Bookdetail.findById(req.params.id);
+    if (!book) {
+      return next(errorHandler(404, 'book not found!'));
+    }
+    res.status(200).json(book);
+  } catch (error) {
+    next(error);
+  }
+};
