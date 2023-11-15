@@ -12,10 +12,11 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 
+
 export default function CreateBook() {
 
   const { currentUser } = useSelector((state) => state.user);
-  console.log(currentUser.username);
+  // console.log(currentUser.username);
   const navigate = useNavigate();
   const [files,setFiles] = useState([]);
   console.log(files)
@@ -37,7 +38,7 @@ export default function CreateBook() {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  console.log(formData);
+  // console.log(formData);
 
   const handleImageSubmit = (e) => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
@@ -68,53 +69,60 @@ export default function CreateBook() {
   };
 
   const storeImage = async (file) => {
-    // return new Promise((resolve, reject) => {
-    //   const storage = getStorage(app);
-    //   const fileName = new Date().getTime() + file.name;
-    //   const storageRef = ref(storage, fileName);
-    //   const uploadTask = uploadBytesResumable(storageRef, file);
-    //   // const uploadTask = XMLHttpRequestUpload(storageRef,file);
-    //   uploadTask.on(
-    //     'state_changed',
-    //     (snapshot) => {
-    //       const progress =
-    //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;  // this will show the percentage of image is uploaded 
-    //       console.log(`Upload is ${progress}% done`);
-    //     },
-    //     (error) => {
-    //       reject(error);
-    //     },
-    //     () => {
-    //       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-    //         resolve(downloadURL);
-    //       });
-    //     }
-    //   );
-    // });
-
-    const storage = getStorage(app);
-    const fileName = new Date().getTime() + file.name;
-    const storageRef = ref(storage, fileName);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-
-    uploadTask.on(
-      'state_changed',
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        // setFilePerc(Math.round(progress));
-        console.log(`Upload is ${progress}% done`);
-      },
-      (error) => {
-        // setFileUploadError(true);
-        reject(error);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-        resolve(downloadURL);
-        });
+    return new Promise((resolve, reject) => {
+      const storage = getStorage(app);
+      const fileName = new Date().getTime() + file.name;
+      const storageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      // the above line is generating error of cors origin 
+      // on 16.11.23 it is solved my making some changes in firebase storage rules 
+      /*service firebase.storage {
+        match /b/{bucket}/o {
+          match /{allPaths=**} {
+            allow read, write;
+          }
         }
-    );
+      }*/
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;  // this will show the percentage of image is uploaded 
+          console.log(`Upload is ${progress}% done`);
+        },
+        (error) => {
+          reject(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            resolve(downloadURL);
+          });
+        }
+      );
+    });
+
+    // const storage = getStorage(app);
+    // const fileName = new Date().getTime() + file.name;
+    // const storageRef = ref(storage, fileName);
+    // const uploadTask = uploadBytesResumable(storageRef, file);
+    // uploadTask.on(
+    //   'state_changed',
+    //   (snapshot) => {
+    //     const progress =
+    //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    //     // setFilePerc(Math.round(progress));
+    //     console.log(`Upload is ${progress}% done`);
+    //   },
+    //   (error) => {
+    //     // setFileUploadError(true);
+    //     reject(error);
+    //   },
+    //   () => {
+    //     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+    //     resolve(downloadURL);
+    //     });
+    //     }
+    // );
 
   };
 

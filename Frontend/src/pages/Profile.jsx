@@ -74,11 +74,17 @@ export default function Profile() {
     }
   };
 
+  
   const handleShowBooks = async () => {
     try {
       setShowBooksError(false);
       const res = await fetch(`/api/user/books/${currentUser._id}`);
       const data = await res.json();
+      console.log(data.length)
+      if(data.length == 0){
+        console.log("Books are not uploaded")
+        document.getElementById("bookNotExist").innerHTML="Books are not uploaded";
+      }
       if (data.success === false) {
         setShowBooksError(true);
         return;
@@ -178,6 +184,7 @@ export default function Profile() {
       <ArrowRight className="ml-2 h-4 w-4" />
     </button>
 
+      <p className='text-green-700 mt-5' id='bookNotExist'></p>
 
 
     {userBooks && userBooks.length > 0 && (
@@ -202,6 +209,7 @@ export default function Profile() {
                 to={`/book/${book._id}`}
               >
                 <p>{book.bookName}</p>
+                <p className='font-normal'>{book.authorName}</p>
               </Link>
 
               <div className='flex flex-col item-center'>
