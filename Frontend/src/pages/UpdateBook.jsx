@@ -28,7 +28,8 @@ export default function UpdateBook() {
     type:"sell",
     offer:false,
     imageUrls:[],
-    userRef:currentUser._id
+    userRef:currentUser._id,
+    category:""
   });
 
   const [imageUploadError, setImageUploadError] = useState(false);
@@ -128,6 +129,12 @@ export default function UpdateBook() {
         [e.target.id]: e.target.checked,
       });
     }
+    if(e.target.id==='category'){
+      setFormData({
+        ...formData,
+        [e.target.id]: e.target.value,
+      })
+    }
 
     if (
       e.target.type === 'number' ||
@@ -176,7 +183,7 @@ export default function UpdateBook() {
   return (
     <main className='p-3 max-w-4xl mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>
-        Update Book 
+        Update Book
       </h1>
       <form onSubmit={handleSubmit} className='flex flex-col sm:flex-row gap-4'>
         <div className='flex flex-col gap-4 flex-1'>
@@ -202,6 +209,20 @@ export default function UpdateBook() {
             onChange={handleChange}
             value={formData.authorName}
           />
+          <select
+            id="category"
+            className="border p-3 rounded-lg"
+            onChange={handleChange}
+            required
+            defaultValue={formData.category}
+
+          >
+            <option>Novel Book</option>
+            <option>Self-Help Book</option>
+            <option>Poetry Book</option>
+            <option>Reference Book</option>
+            <option >Text Book</option>
+          </select>
           <textarea
             type='text'
             placeholder='Description'

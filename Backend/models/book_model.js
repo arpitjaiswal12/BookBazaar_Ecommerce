@@ -34,6 +34,10 @@ const BookSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    category:{
+      type:String,
+      require: true
+    },
     offer: { // discount or not      
       type: Boolean,
       required: true,

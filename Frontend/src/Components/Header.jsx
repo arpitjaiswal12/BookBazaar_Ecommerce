@@ -3,6 +3,7 @@ import { FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Dropdown from './Dropdown';
 import { useSelector } from 'react-redux';
+import { MdOutlineShoppingCart } from "react-icons/md";
 
 export default function Header() {
 
@@ -61,6 +62,11 @@ export default function Header() {
             )}
       </Link>
     <Dropdown/>
+    <Link to='/card'>
+    <div className='cursor-pointer pt-2'>
+    <MdOutlineShoppingCart />
+    </div>
+    </Link>
   </ul>
   
 </div>
