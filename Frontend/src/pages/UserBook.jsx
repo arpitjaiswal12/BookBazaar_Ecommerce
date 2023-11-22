@@ -59,7 +59,7 @@ export default function UserBook() {
         <section className="overflow-hidden ">
           <div className="mx-auto max-w-6xl px-5 py-24">
             <div className="mx-auto flex flex-wrap items-center lg:w-4/5">
-              <div className="h-auto w-auto rounded lg:h-96 lg:w-1/2">
+              <div className="h-auto w-auto rounded lg:h-96 lg:w-1/3 ">
                 <Carousel
                   autoPlay={true}
                   showThumbs={false}
