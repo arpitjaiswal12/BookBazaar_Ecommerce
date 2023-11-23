@@ -307,7 +307,7 @@ export default function CreateBook() {
                   <p>Discounted price</p>
 
                   {formData.type === "rent" && (
-                    <span className="text-xs">($ / month)</span>
+                    <span className="text-xs">( &#8377; / month)</span>
                   )}
                 </div>
               </div>

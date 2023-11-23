@@ -12,6 +12,7 @@ import CreateBook from './pages/CreateBook'
 import UpdateBook from './pages/UpdateBook'
 import Card from './pages/Card/Card'
 import UserBook from './pages/UserBook'
+import Search from './pages/Search'
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
       <Route path='/about' element={<About/>}/>
       <Route path='/card' element={<Card/>} />
       <Route path='/book/:bookId' element={<UserBook/>} />
+      <Route path='/search' element={<Search/>} />
       <Route element={<PrivateRoute/>}> {/* this components only render when user is login */}
           <Route path='/profile' element={<Profile />}/>
           <Route path='/createbook' element={<CreateBook/>}/>

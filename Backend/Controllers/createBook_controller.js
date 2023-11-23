@@ -1,5 +1,5 @@
-import { errorHandler } from '../utils/error.js';
-import Bookdetail from "../models/book_model.js"
+import { errorHandler } from "../utils/error.js";
+import Bookdetail from "../models/book_model.js";
 
 export const createBook = async (req, res, next) => {
   try {
@@ -14,16 +14,16 @@ export const deleteBook = async (req, res, next) => {
   const book = await Bookdetail.findById(req.params.id);
 
   if (!book) {
-    return next(errorHandler(404, 'book not found!'));
+    return next(errorHandler(404, "book not found!"));
   }
 
   if (req.user.id !== book.userRef) {
-    return next(errorHandler(401, 'You can only delete your own books!'));
+    return next(errorHandler(401, "You can only delete your own books!"));
   }
 
   try {
     await Bookdetail.findByIdAndDelete(req.params.id);
-    res.status(200).json('book has been deleted!');
+    res.status(200).json("book has been deleted!");
   } catch (error) {
     next(error);
   }
@@ -32,10 +32,10 @@ export const deleteBook = async (req, res, next) => {
 export const updateBook = async (req, res, next) => {
   const book = await Bookdetail.findById(req.params.id);
   if (!book) {
-    return next(errorHandler(404, 'book not found!'));
+    return next(errorHandler(404, "book not found!"));
   }
   if (req.user.id !== book.userRef) {
-    return next(errorHandler(401, 'You can only update your own books!'));
+    return next(errorHandler(401, "You can only update your own books!"));
   }
 
   try {
@@ -54,7 +54,7 @@ export const getBook = async (req, res, next) => {
   try {
     const book = await Bookdetail.findById(req.params.id);
     if (!book) {
-      return next(errorHandler(404, 'book not found!'));
+      return next(errorHandler(404, "book not found!"));
     }
     res.status(200).json(book);
   } catch (error) {
@@ -62,30 +62,27 @@ export const getBook = async (req, res, next) => {
   }
 };
 
-
 export const getBooks = async (req, res, next) => {
   try {
     const limit = parseInt(req.query.limit) || 10; // means no. of books to be shown
 
     const startIndex = parseInt(req.query.startIndex) || 0;
 
-    const searchTerm = req.query.searchTerm || '';
+    const searchTerm = req.query.searchTerm || "";
 
-    const sort = req.query.sort || 'createdAt';
+    const sort = req.query.sort || "createdAt";
 
-    const order = req.query.order || 'desc';
+    const order = req.query.order || "desc";
 
     const books = await Bookdetail.find({
-      bookName: { $regex: searchTerm, $options: 'i' } // here regex serach the anywhere in the books and option means don't care about and small/capital letters 
+      bookName: { $regex: searchTerm, $options: "i" }, // here regex serach the anywhere in the books and option means don't care about and small/capital letters
+      // category : { $regex: searchTerm, $options: 'i' }
     })
       .sort({ [sort]: order })
       .limit(limit)
       .skip(startIndex);
-
     return res.status(200).json(books);
   } catch (error) {
     next(error);
   }
 };
-
-
