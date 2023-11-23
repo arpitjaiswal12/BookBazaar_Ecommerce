@@ -64,7 +64,7 @@ export const getBook = async (req, res, next) => {
 
 export const getBooks = async (req, res, next) => {
   try {
-    const limit = parseInt(req.query.limit) || 10; // means no. of books to be shown
+    const limit = parseInt(req.query.limit) || 12; // means no. of books to be shown
 
     const startIndex = parseInt(req.query.startIndex) || 0;
 
