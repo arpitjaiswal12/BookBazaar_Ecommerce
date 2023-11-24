@@ -173,7 +173,7 @@ export default function UpdateBook() {
       if (data.success === false) {
         setError(data.message);
       }
-      navigate(`/books/${data._id}`);
+      navigate(`/book/${data._id}`);
     } catch (error) {
       setError(error.message);
       setLoading(false);
@@ -372,7 +372,7 @@ export default function UpdateBook() {
             ))}
           <button
             disabled={loading || uploading}
-            className='p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
+            className='p-3 bg-sky-500 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
           >
             {loading ? 'Updating...' : 'Update book'}
           </button>

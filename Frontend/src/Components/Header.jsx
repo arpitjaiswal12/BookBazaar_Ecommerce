@@ -38,9 +38,9 @@ export default function Header() {
     <header className="bg-gray-50 shadow-md">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-2">
         <Link to="/">
-          <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
+          <h1 className="font-serif font-bold text-sm sm:text-xl flex flex-wrap">
             <span className="text-red-800">Book</span>
-            <span className="text-red-500">Buy</span>
+            <span className="text-red-500">Bazaar</span>
           </h1>
         </Link>
         <form onSubmit={handleSubmit} className="border-2 bg-slate-100 p-2 rounded-lg flex items-center">

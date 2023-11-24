@@ -10,7 +10,6 @@ export default function Search() {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
-    // const searchTermFromUrl = urlParams.get("searchTerm");
 
     const fetchBooks = async () => {
       setLoading(true);
@@ -19,7 +18,7 @@ export default function Search() {
       const res = await fetch(`/api/book/get?${searchQuery}`);
       const data = await res.json();
 
-      if (data.length > 12) {
+      if (data.length > 11) {
         setShowMore(true);
       } else {
         setShowMore(false);
@@ -63,7 +62,7 @@ export default function Search() {
       {showMore && (
         <p
           onClick={onShowMoreClick}
-          className="text-green-700 hover:underline p-7 text-center w-full"
+          className="text-blue-700 cursor-pointer hover:underline w-full"
         >
           Show more
         </p>
