@@ -13,6 +13,9 @@ import UpdateBook from './pages/UpdateBook'
 import Card from './pages/Card/Card'
 import UserBook from './pages/UserBook'
 import Search from './pages/Search'
+import Contact from './pages/Contact'
+import SuccessBanner from './Components/SuccessBanner'
+import AlertBanner from './Components/AlertBanner'
 
 function App() {
 
@@ -33,6 +36,9 @@ function App() {
           <Route path='/createbook' element={<CreateBook/>}/>
           <Route path='/updatebook/:bookId' element={<UpdateBook/>}/>
       </Route>
+      <Route path='/contact' element={<Contact/>}/>
+      <Route path='/contact/success/banner' element={<SuccessBanner/>}/>
+      <Route path='/contact/alert/banner' element={<AlertBanner/>}/>
       
 
     </Routes>

@@ -1,7 +1,8 @@
 import bcryptjs from 'bcryptjs';
 import User from '../models/user_model.js';
 import { errorHandler } from '../utils/error.js';
-import Bookdetail from "../models/book_model.js"
+import Bookdetail from "../models/book_model.js";
+import ContactUser from "../models/contact_model.js";
 
 export const updateUser = async (req, res, next) => {
   if (req.user.id !== req.params.id)
@@ -57,4 +58,13 @@ export const getUserBooks = async (req, res, next) => {
   } else {
     return next(errorHandler(401, 'You can only view your own books!'));
   }
+};
+
+export const ContactAdmin = async (req, res, next) => {
+    try {
+      const contactdetail = await ContactUser.create(req.body);
+      return res.status(201).json(contactdetail);
+    } catch (error) {
+      next(error);
+    }
 };

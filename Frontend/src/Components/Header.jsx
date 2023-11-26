@@ -9,17 +9,17 @@ export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
-  const handleSubmit = (e) =>{
+  const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(window.location.search);
-    urlParams.set('searchTerm', searchTerm);
+    urlParams.set("searchTerm", searchTerm);
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
-  }
+  };
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
-    const searchTermFromUrl = urlParams.get('searchTerm');
+    const searchTermFromUrl = urlParams.get("searchTerm");
     if (searchTermFromUrl) {
       setSearchTerm(searchTermFromUrl);
     }
@@ -35,7 +35,7 @@ export default function Header() {
     //   </a> */}
     //   </div>
 
-    <header className="bg-gray-50 shadow-md">
+    <header className="bg-gray-50  shadow-md">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-2">
         <Link to="/">
           <h1 className="font-serif font-bold text-sm sm:text-xl flex flex-wrap">
@@ -43,7 +43,10 @@ export default function Header() {
             <span className="text-red-500">Bazaar</span>
           </h1>
         </Link>
-        <form onSubmit={handleSubmit} className="border-2 bg-slate-100 p-2 rounded-lg flex items-center">
+        <form
+          onSubmit={handleSubmit}
+          className="border-2 bg-slate-100 p-2 rounded-lg flex items-center"
+        >
           <input
             type="text"
             placeholder="Search..."
@@ -55,17 +58,23 @@ export default function Header() {
             <FaSearch className="text-red-500" />
           </button>
         </form>
-        <ul className="flex gap-6">
+        <ul className="flex gap-2">
           <Link to="/">
-            <li className="hidden sm:inline text-slate-950 hover:underline">
+            <li className="hidden sm:inline text-slate-950 hover:text-red-500">
               Home
             </li>
           </Link>
           <Link to="/about">
-            <li className="hidden sm:inline text-slate-950 hover:underline">
+            <li className="hidden sm:inline text-slate-950 hover:text-red-500">
               About
             </li>
           </Link>
+          <Link to="/contact">
+            <li className="hidden sm:inline text-slate-950 hover:text-red-500">
+              Contact
+            </li>
+          </Link>
+          <Dropdown />
           <Link to="/profile">
             {currentUser ? ( // profile image
               <img
@@ -77,7 +86,7 @@ export default function Header() {
               <li className=" text-slate-700 hover:underline"> Login</li>
             )}
           </Link>
-          <Dropdown />
+          
           <Link to="/card">
             <div className="cursor-pointer pt-2">
               <MdOutlineShoppingCart />

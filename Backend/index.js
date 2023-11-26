@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import authRoute from "./routes/auth_route.js";
 import userRoute from "./routes/user_route.js";
 import createBookRoute from "./routes/createBook_route.js";
+// import contactAdmin from "./routes/contact_route.js"
 
 const app=express();
 dotenv.config();
@@ -23,11 +24,11 @@ app.use(cookieParser());
 app.use("/api/auth", authRoute);  
 app.use("/api/user", userRoute);  
 app.use("/api/book", createBookRoute);
+// app.use("/api/user",contactAdmin);
 
 app.listen(3000,()=>{
     console.log("Server is running at 3000 ")
 })
-
 
 // create a middleware function to handle possible error
 app.use((err, req, res, next) => {

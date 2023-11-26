@@ -103,7 +103,7 @@ export default function Home() {
                 Show more offers
               </Link>
             </div>
-            <div className="flex gap-8">
+            <div className="flex flex-wrap gap-8">
               {offerBooks.map((book) => (
                 // <bookItem book={book} key={book._id} />
                 <BookCard book={book} key={book._id} />
@@ -124,7 +124,7 @@ export default function Home() {
                 Show more books for rent
               </Link>
             </div>
-            <div className="flex gap-8">
+            <div className="flex flex-wrap  gap-8">
               {rentBooks.map((book) => (
                 <BookCard book={book} key={book._id} />
               ))}
@@ -144,7 +144,7 @@ export default function Home() {
                 Show more books for sale
               </Link>
             </div>
-            <div className="flex gap-8">
+            <div className="flex flex-weap gap-8">
               {saleBooks.map((book) => (
                 <BookCard book={book} key={book._id} />
               ))}
