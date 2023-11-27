@@ -93,7 +93,7 @@ export default function Home() {
         {offerBooks && offerBooks.length > 0 && (
           <div className="">
             <div className="my-3">
-              <h2 className="text-2xl font-semibold text-slate-600">
+              <h2 className="text-2xl font-semibold text-black">
                 Recent offers
               </h2>
               <Link
@@ -103,7 +103,7 @@ export default function Home() {
                 Show more offers
               </Link>
             </div>
-            <div className="flex flex-wrap gap-8">
+            <div className="flex flex-wrap md:flex-nowrap gap-8">
               {offerBooks.map((book) => (
                 // <bookItem book={book} key={book._id} />
                 <BookCard book={book} key={book._id} />
@@ -114,7 +114,7 @@ export default function Home() {
         {rentBooks && rentBooks.length > 0 && (
           <div className="">
             <div className="my-3">
-              <h2 className="text-2xl font-semibold text-slate-600">
+              <h2 className="text-2xl font-semibold text-black">
                 Recent books for rent
               </h2>
               <Link
@@ -124,7 +124,7 @@ export default function Home() {
                 Show more books for rent
               </Link>
             </div>
-            <div className="flex flex-wrap  gap-8">
+            <div className="flex flex-wrap md:flex-nowrap gap-8">
               {rentBooks.map((book) => (
                 <BookCard book={book} key={book._id} />
               ))}
@@ -134,7 +134,7 @@ export default function Home() {
         {saleBooks && saleBooks.length > 0 && (
           <div className="">
             <div className="my-3">
-              <h2 className="text-2xl font-semibold text-slate-600">
+              <h2 className="text-2xl font-semibold text-black">
                 Recent books for sale
               </h2>
               <Link
@@ -144,7 +144,7 @@ export default function Home() {
                 Show more books for sale
               </Link>
             </div>
-            <div className="flex flex-weap gap-8">
+            <div className="flex flex-wrap md:flex-nowrap gap-8">
               {saleBooks.map((book) => (
                 <BookCard book={book} key={book._id} />
               ))}

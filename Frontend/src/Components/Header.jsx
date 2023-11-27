@@ -58,7 +58,7 @@ export default function Header() {
             <FaSearch className="text-red-500" />
           </button>
         </form>
-        <ul className="flex gap-2">
+        <ul className="flex md:gap-8">
           <Link to="/">
             <li className="hidden sm:inline text-slate-950 hover:text-red-500">
               Home
@@ -74,7 +74,10 @@ export default function Header() {
               Contact
             </li>
           </Link>
-          <Dropdown />
+          <li className="hidden sm:inline text-slate-950 hover:text-red-500">
+            <Dropdown />
+          </li>
+
           <Link to="/profile">
             {currentUser ? ( // profile image
               <img
@@ -86,7 +89,7 @@ export default function Header() {
               <li className=" text-slate-700 hover:underline"> Login</li>
             )}
           </Link>
-          
+
           <Link to="/card">
             <div className="cursor-pointer pt-2">
               <MdOutlineShoppingCart />
