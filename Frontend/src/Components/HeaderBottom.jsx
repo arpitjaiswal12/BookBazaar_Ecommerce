@@ -7,6 +7,33 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const HeaderBottom = () => {
+  const [showBooksError, setShowBooksError] = useState(false);
+  const [userBooks, setUserBooks] = useState([]);
+  const handleShowCartItem = async () => {
+    try {
+      setShowBooksError(false);
+      const res = await fetch(`/api/user/view-cart/${currentUser._id}`);
+      const data = await res.json();
+      if (data.length == 0) {
+        console.log("Books are not uploaded");
+        document.getElementById("bookNotExist").innerHTML =
+          "Books are not uploaded";
+      }
+      if (data.success === false) {
+        setShowBooksError(true);
+        return;
+      }
+      setUserBooks(data);
+    } catch (error) {
+      setShowBooksError(true);
+    }
+  };
+  useEffect(() => {
+    handleShowCartItem();
+  });
+
+
+
   const [show, setShow] = useState(false);
   const [showUser, setShowUser] = useState(false);
   const navigate = useNavigate();
@@ -105,7 +132,7 @@ const HeaderBottom = () => {
               <div className="relative">
                 <FaShoppingCart />
                 <span className="absolute bg-red-300 font-titleFont font-bold bottom-3 -right-3.5 text-xs w-4 h-4 flex items-center justify-center rounded-full bg-primeColor text-red-700">
-                  {/* {products.length > 0 ? products.length : 0} */}5
+                  {userBooks.length > 0 ? userBooks.length : 0}
                 </span>
               </div>
             </Link>
