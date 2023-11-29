@@ -7,6 +7,7 @@ import authRoute from "./routes/auth_route.js";
 import userRoute from "./routes/user_route.js";
 import createBookRoute from "./routes/createBook_route.js";
 // import contactAdmin from "./routes/contact_route.js"
+import cartRoute from "./routes/addToCart_route.js"
 
 const app=express();
 dotenv.config();
@@ -24,6 +25,7 @@ app.use(cookieParser());
 app.use("/api/auth", authRoute);  
 app.use("/api/user", userRoute);  
 app.use("/api/book", createBookRoute);
+app.use("/api/cart", cartRoute);
 // app.use("/api/user",contactAdmin);
 
 app.listen(3000,()=>{
