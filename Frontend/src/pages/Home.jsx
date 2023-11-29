@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import BannerImage from "../images/banner_img.jpg";
+import BannerImage from "../assets/images/banner_img.jpg";
 import BookCard from "../Components/BookCard";
 
 export default function Home() {
@@ -54,9 +54,6 @@ export default function Home() {
             <div className="flex flex-col md:flex-row items-center justify-around -mt-14 gap-4">
               <div className="flex items-center gap-3">
                 <img
-                  // src="https://m.media-amazon.com/images/I/51vUoD0JIhL.jpg"
-                  // src="https://m.media-amazon.com/images/I/51vUoD0JIhL.jp"
-                  // src="https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg"
                   src={BannerImage}
                   alt=""
                   className=" w-[30rem]"
@@ -69,16 +66,16 @@ export default function Home() {
           <div className="md:w-1/2 px-4 space-y-7">
             <h2 className="md:text-5xl text-4xl font-bold md:leading-snug leading-snug">
               Dive into a world of endless possibilities at our{" "}
-              <span className="text-red-800">Book</span>{" "}
-              <span className="text-red-500">Bazaar</span>
+              <span className="text-green-700">Book</span>{" "}
+              <span className="text-green-500">Bazaar</span>
             </h2>
             <p className="text-[#0a0909] text-xl">
               your one-stop shop for buying, selling, and renting books.
             </p>
 
             <div>
-              <Link to="/search">
-                <button className="bg-sky-400 font-semibold hover:bg-red-400 text-white px-8 py-3 rounded-full">
+              <Link to="/shop">
+                <button className="bg-sky-400 font-semibold hover:bg-green-500 text-white px-8 py-3 rounded-full">
                   Buy Now
                 </button>
               </Link>

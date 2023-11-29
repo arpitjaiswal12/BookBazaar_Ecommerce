@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
 import Dropdown from "./Dropdown";
 import { useSelector } from "react-redux";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import { navBarList } from "./Constants/index.js";
+import { motion } from "framer-motion";
+import logo from "../assets/images/logo.png";
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
@@ -26,24 +29,16 @@ export default function Header() {
   }, [location.search]);
 
   return (
-    //     <div>
-    //         {/* <a href="#" class="bg-purple-600 text-gray-50 hover:bg-purple-700 p-3 px-3 sm:px-5 rounded-full">
-    //     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    //       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-    //     </svg>
-    //     Cart (0)
-    //   </a> */}
-    //   </div>
-
-    <header className="bg-gray-50  shadow-md">
-      <div className="flex justify-between items-center max-w-6xl mx-auto p-2">
+    <header className="bg-white  shadow-md">
+      <div className="flex justify-between items-center max-w-6xl mx-auto px-2 py-1 sm:p-2">
         <Link to="/">
-          <h1 className="font-serif font-bold text-sm sm:text-xl flex flex-wrap">
+          {/* <h1 className="font-serif font-bold text-sm sm:text-xl flex flex-wrap">
             <span className="text-red-800">Book</span>
             <span className="text-red-500">Bazaar</span>
-          </h1>
+          </h1> */}
+          <img src={logo} alt="" className=" w-40 object-cover" />
         </Link>
-        <form
+        {/* <form
           onSubmit={handleSubmit}
           className="border-2 bg-slate-100 p-2 rounded-lg flex items-center"
         >
@@ -57,8 +52,8 @@ export default function Header() {
           <button>
             <FaSearch className="text-red-500" />
           </button>
-        </form>
-        <ul className="flex md:gap-8">
+        </form> */}
+        {/* <ul className="flex md:gap-8">
           <Link to="/">
             <li className="hidden sm:inline text-slate-950 hover:text-red-500">
               Home
@@ -89,13 +84,47 @@ export default function Header() {
               <li className=" text-slate-700 hover:underline"> Login</li>
             )}
           </Link>
-
           <Link to="/card">
             <div className="cursor-pointer pt-2">
               <MdOutlineShoppingCart />
             </div>
           </Link>
-        </ul>
+        </ul> */}
+        <div>
+          <motion.ul
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center w-auto z-50 p-0 gap-2"
+          >
+            <>
+              {navBarList.map(({ _id, title, link }) => (
+                <NavLink
+                  key={_id}
+                  className="flex font-normal hover:font-bold w-20 h-6 justify-center items-center px-12 text-base text-[#767676] hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0"
+                  to={link}
+                  state={{ data: location.pathname.split("/")[1] }}
+                >
+                  <li>{title}</li>
+                </NavLink>
+              ))}
+            </>
+            <Link to="/profile">
+              {currentUser ? ( // profile image
+                <img
+                  className="rounded-full h-7 w-7 object-cover"
+                  src={currentUser.avatar}
+                  alt="profile"
+                />
+              ) : (
+                <li className=" flex font-normal hover:font-bold w-20 h-6 justify-center items-center px-12 text-base text-[#767676] hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0">
+                  {" "}
+                  Login
+                </li>
+              )}
+            </Link>
+          </motion.ul>
+        </div>
       </div>
     </header>
   );
