@@ -8,12 +8,14 @@ import userRoute from "./routes/user_route.js";
 import createBookRoute from "./routes/createBook_route.js";
 // import contactAdmin from "./routes/contact_route.js"
 import cartRoute from "./routes/addToCart_route.js"
+import path from "path";
 
-const app=express();
+
 dotenv.config();
-
- 
 dbConnect();
+
+const __dirname = path.resolve();
+const app=express();
 
 // middleware to parse json request body
 app.use(express.json());
@@ -27,6 +29,12 @@ app.use("/api/user", userRoute);
 app.use("/api/book", createBookRoute);
 app.use("/api/cart", cartRoute);
 // app.use("/api/user",contactAdmin);
+
+app.use(express.static(path.join(__dirname,'/Frontend/dist')));
+
+app.get('*',(req,res)=>{
+  res.sendFile(path.join(__dirname, 'Frontend', 'dist', 'index.html'));
+});
 
 app.listen(3000,()=>{
     console.log("Server is running at 3000 ")
