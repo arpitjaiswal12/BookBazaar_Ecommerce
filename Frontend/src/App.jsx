@@ -10,13 +10,14 @@ import Dropdown from './Components/Dropdown'
 import PrivateRoute from './Components/PrivateRoute'
 import CreateBook from './pages/CreateBook'
 import UpdateBook from './pages/UpdateBook'
-import Card from './pages/card_pages/Card'
+import Cart from './Components/Cart'
 import UserBook from './pages/UserBook'
 import Search from './pages/Search'
 import Contact from './pages/Contact'
 import SuccessBanner from './Components/SuccessBanner'
 import AlertBanner from './Components/AlertBanner'
 import HeaderBottom from './Components/HeaderBottom'
+
 
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
       <Route path='/login' element={<Login />}/>
       <Route path='/signup' element={<SignUp />}/>
       <Route path='/about' element={<About/>}/>
-      <Route path='/card' element={<Card/>} />
+      <Route path='/view-cart' element={<Cart/>} />
       <Route path='/book/:bookId' element={<UserBook/>} />
       {/* <Route path='/search' element={<Search/>} /> */}
 

@@ -101,7 +101,7 @@ const HeaderBottom = () => {
             <FaSearch className="w-5 h-5" />
           </form>
           <div className="flex gap-4 mt-2 lg:mt-0 items-center pr-6 cursor-pointer relative">
-            <Link to="/cart">
+            <Link to="/view-cart">
               <div className="relative">
                 <FaShoppingCart />
                 <span className="absolute bg-red-300 font-titleFont font-bold bottom-3 -right-3.5 text-xs w-4 h-4 flex items-center justify-center rounded-full bg-primeColor text-red-700">
