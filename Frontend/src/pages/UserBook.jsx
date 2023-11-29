@@ -18,6 +18,67 @@ export default function UserBook() {
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
 
+  const [cartItemData, setCartItemData] = useState({
+    bookName: "",
+    authorName: "",
+    pickUpAddress: "",
+    deliveryAddress: "",
+    sellerName: "",
+    customerName: "",
+    regularPrice: 0,
+    discountPrice: 0,
+    type: "",
+    category: "",
+    offer: false,
+    imageUrls: [],
+    userRef:"",
+  });
+
+  const handleAddToCart = async (e) => {
+    e.preventDefault();
+    try {
+      if (+cartItemData.regularPrice < +cartItemData.discountPrice)
+        return setError("Discount price must be lower than regular price");
+      setLoading(true);
+      setError(false);
+      const res = await fetch("/api/cart/add-cart-item", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...cartItemData,
+          userRef: currentUser._id,
+          bookName: book.bookName,
+          authorName:book.authorName,
+          pickUpAddress: book.address,
+          deliveryAddress: "empty",
+          sellerName: book.sellerName,
+          customerName: currentUser.username,
+          regularPrice: book.regularPrice,
+          discountPrice: book.discountPrice,
+          type: book.type,
+          category: book.category,
+          offer: book.offer,
+          imageUrls: book.imageUrls[0],
+          userRef: currentUser._id
+        }),
+      });
+      const data = await res.json();
+      console.log(data);
+      setLoading(false);
+      alert("Item is Added to card !! view card to see your item ")
+      // navigate(`/view-cart`)
+      if (data.success === false) {
+        setError(data.message);
+      }
+      
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     const fetchBook = async () => {
       try {
@@ -91,7 +152,9 @@ export default function UserBook() {
                     </span>
                   </span>
                 </div>
-                <p className="text-sm font-medium text-red-700 mb-3">{book.category}</p>
+                <p className="text-sm font-medium text-red-700 mb-3">
+                  {book.category}
+                </p>
                 <textarea
                   type="text"
                   placeholder="Description"
@@ -144,13 +207,23 @@ export default function UserBook() {
                       }
                     }}
                   </div>
-
-                  <button
+                  {currentUser && (
+                    <button
                     type="button"
                     className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                    onClick={handleAddToCart}
                   >
                     Add to Cart
                   </button>
+                  ) || (
+                    <button
+                    type="button"
+                    className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                  >
+                    Please Login to add item to Cart
+                  </button>
+                  ) }
+                  
                 </div>
                 <p className="text-lg font-medium text-red-700">
                   {" "}

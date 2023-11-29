@@ -23,8 +23,9 @@ export default function CartItem({
   const [userBooks, setUserBooks] = useState([]);
 
   const handleBookDelete = async (bookId) => {
+    console.log(bookId);
     try {
-      const res = await fetch(`/api/book/delete/${bookId}`, {
+      const res = await fetch(`/api/cart/delete/656739dea9d90963c9302301`, {
         method: "DELETE",
       });
       const data = await res.json();

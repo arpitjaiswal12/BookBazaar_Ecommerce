@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import empty_card from "../assets/images/empty-cart-for-not-login.jpg";
 
 const products = [
   {
@@ -12,7 +13,7 @@ const products = [
     name: "Nike Air Force 1 07 LV8",
     href: "#",
     price: "₹47,199",
-    originalPrice: "₹48,900"    ,
+    originalPrice: "₹48,900",
     discount: "5% Off",
     color: "Orange",
     size: "8 UK",
@@ -51,13 +52,11 @@ export default function Cart() {
   const dispatch = useDispatch();
   const [showBooksError, setShowBooksError] = useState(false);
   const [userBooks, setUserBooks] = useState([]);
-
-  const handleShowBooks = async () => {
+  const handleShowCartItem = async () => {
     try {
       setShowBooksError(false);
-      const res = await fetch(`/api/user/books/${currentUser._id}`);
+      const res = await fetch(`/api/user/view-cart/${currentUser._id}`);
       const data = await res.json();
-      console.log(data.length);
       if (data.length == 0) {
         console.log("Books are not uploaded");
         document.getElementById("bookNotExist").innerHTML =
@@ -74,31 +73,9 @@ export default function Cart() {
   };
 
   useEffect(() => {
-    handleShowBooks();
+    handleShowCartItem();
   });
 
-  const handleBookDelete = async (bookId) => {
-    try {
-      if (confirm("Press ok to delete book?")) {
-        const res = await fetch(`/api/book/delete/${bookId}`, {
-          method: "DELETE",
-        });
-        const data = await res.json();
-        if (data.success === false) {
-          console.log(data.message);
-          return;
-        }
-
-        setUserBooks(
-          (prev) => prev.filter((book) => book._id !== bookId) //this will filter out the book which is deleted
-        );
-      } else {
-        console.log("Book is not deleted");
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
 
   return (
     <div className="mx-auto max-w-7xl px-2 lg:px-0">
@@ -106,35 +83,43 @@ export default function Cart() {
         <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           Shopping Cart
         </h1>
+        <div>
+          {!currentUser && (
+            <div className="flex flex-col justify-center items-center text-center">
+              <img src={empty_card} alt="" className=" w-[30%]" />
+              <p className=" text-3xl ">Please <Link to="/login" className=" underline text-blue-300">Login</Link> to view cart</p>
+            </div>
+          )}
+        </div>
         <form className="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
+
           {userBooks && userBooks.length > 0 && (
             <section
-            aria-labelledby="cart-heading"
-            className="rounded-lg bg-white lg:col-span-8"
-          >
-            
-            <h2 id="cart-heading" className="sr-only">
-              Items in your shopping cart
-            </h2>
-            <ul role="list" className="divide-y divide-gray-200">
-              {userBooks.map((book, productIdx) => (
-                <CartItem
-                  bookImg={book.imageUrls[0]}
-                  bookName={book.bookName}
-                  bookAuthor={book.authorName}
-                  bookOriginalPrice={book.regularPrice}
-                  bookDiscountPrice={(book.offer && book.discountPrice)}
-                  bookQuantity={5}
-                  bookOffer={book.offer}
-                  bookId={book._id}
-                  bookType={book.type}
-                />
-              ))}
-            </ul>
-          </section>
-          ) }
+              aria-labelledby="cart-heading"
+              className="rounded-lg bg-white lg:col-span-8"
+            >
+              <h2 id="cart-heading" className="sr-only">
+                Items in your shopping cart
+              </h2>
+              <ul role="list" className="divide-y divide-gray-200">
+                {userBooks.map((book, productIdx) => (
+                  <CartItem
+                    bookImg={book.imageUrls[0]}
+                    bookName={book.bookName}
+                    bookAuthor={book.authorName}
+                    bookOriginalPrice={book.regularPrice}
+                    bookDiscountPrice={book.offer && book.discountPrice}
+                    bookQuantity={5}
+                    bookOffer={book.offer}
+                    bookId={currentUser._id}
+                    bookType={book.type}
+                  />
+                ))}
+              </ul>
+            </section>
+          )}
           {/* Order summary */}
-          <section
+          {/* <section
             aria-labelledby="summary-heading"
             className="mt-16 rounded-md bg-white lg:col-span-4 lg:mt-0 lg:p-0"
           >
@@ -179,7 +164,7 @@ export default function Cart() {
                 You will save ₹ 3,431 on this order
               </div>
             </div>
-          </section>
+          </section> */}
         </form>
       </div>
     </div>
