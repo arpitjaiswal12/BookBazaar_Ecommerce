@@ -76,6 +76,25 @@ export default function Cart() {
     handleShowCartItem();
   });
 
+  let totalPrice = 0;
+  let discountPrice = 0;
+  const calculateTotalPrice = () => {
+    userBooks.map((book) => {
+      totalPrice = totalPrice + book.regularPrice;
+    });
+  };
+  const calculateTotalDiscount = () => {
+    userBooks.map((book) => {
+      if (book.discountPrice) {
+        discountPrice = discountPrice + book.regularPrice - book.discountPrice;
+      }
+      // console.log(`book ${book.authorName} id is ${book._id}` )
+    });
+  };
+  calculateTotalPrice();
+  calculateTotalDiscount();
+
+  let totalAmount = totalPrice - discountPrice;
 
   return (
     <div className="mx-auto max-w-7xl px-2 lg:px-0">
@@ -87,12 +106,17 @@ export default function Cart() {
           {!currentUser && (
             <div className="flex flex-col justify-center items-center text-center">
               <img src={empty_card} alt="" className=" w-[30%]" />
-              <p className=" text-3xl ">Please <Link to="/login" className=" underline text-blue-300">Login</Link> to view cart</p>
+              <p className=" text-3xl ">
+                Please{" "}
+                <Link to="/login" className=" underline text-blue-300">
+                  Login
+                </Link>{" "}
+                to view cart
+              </p>
             </div>
           )}
         </div>
         <form className="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
-
           {userBooks && userBooks.length > 0 && (
             <section
               aria-labelledby="cart-heading"
@@ -109,9 +133,9 @@ export default function Cart() {
                     bookAuthor={book.authorName}
                     bookOriginalPrice={book.regularPrice}
                     bookDiscountPrice={book.offer && book.discountPrice}
-                    bookQuantity={5}
+                    bookQuantity={1}
                     bookOffer={book.offer}
-                    bookId={currentUser._id}
+                    bookId={book._id}
                     bookType={book.type}
                   />
                 ))}
@@ -119,7 +143,7 @@ export default function Cart() {
             </section>
           )}
           {/* Order summary */}
-          {/* <section
+          <section
             aria-labelledby="summary-heading"
             className="mt-16 rounded-md bg-white lg:col-span-4 lg:mt-0 lg:p-0"
           >
@@ -132,9 +156,11 @@ export default function Cart() {
             <div>
               <dl className=" space-y-1 px-2 py-4">
                 <div className="flex items-center justify-between">
-                  <dt className="text-sm text-gray-800">Price (3 item)</dt>
+                  <dt className="text-sm text-gray-800">
+                    Price {userBooks.length} items
+                  </dt>
                   <dd className="text-sm font-medium text-gray-900">
-                    ₹ 52,398
+                    ₹ {totalPrice}
                   </dd>
                 </div>
                 <div className="flex items-center justify-between pt-4">
@@ -142,29 +168,31 @@ export default function Cart() {
                     <span>Discount</span>
                   </dt>
                   <dd className="text-sm font-medium text-green-700">
-                    - ₹ 3,431
+                    - ₹ {discountPrice}
                   </dd>
                 </div>
                 <div className="flex items-center justify-between py-4">
                   <dt className="flex text-sm text-gray-800">
                     <span>Delivery Charges</span>
                   </dt>
-                  <dd className="text-sm font-medium text-green-700">Free</dd>
+                  <dd className="text-sm font-medium text-green-700">
+                    {totalAmount >= 500 ? <span>Free</span> : <span>+ ₹ 100</span>}
+                  </dd>
                 </div>
                 <div className="flex items-center justify-between border-y border-dashed py-4 ">
                   <dt className="text-base font-medium text-gray-900">
                     Total Amount
                   </dt>
                   <dd className="text-base font-medium text-gray-900">
-                    ₹ 48,967
+                    ₹ {totalAmount >= 500 ? totalAmount : totalAmount+100}
                   </dd>
                 </div>
               </dl>
-              <div className="px-2 pb-4 font-medium text-green-700">
+              {/* <div className="px-2 pb-4 font-medium text-green-700">
                 You will save ₹ 3,431 on this order
-              </div>
+              </div> */}
             </div>
-          </section> */}
+          </section>
         </form>
       </div>
     </div>

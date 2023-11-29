@@ -52,7 +52,7 @@ export default function UserBook() {
           bookName: book.bookName,
           authorName:book.authorName,
           pickUpAddress: book.address,
-          deliveryAddress: "empty",
+          deliveryAddress: "none",
           sellerName: book.sellerName,
           customerName: currentUser.username,
           regularPrice: book.regularPrice,

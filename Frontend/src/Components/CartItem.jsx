@@ -23,9 +23,9 @@ export default function CartItem({
   const [userBooks, setUserBooks] = useState([]);
 
   const handleBookDelete = async (bookId) => {
-    console.log(bookId);
+    // console.log(bookId);
     try {
-      const res = await fetch(`/api/cart/delete/656739dea9d90963c9302301`, {
+      const res = await fetch(`/api/cart/delete/${bookId}`, {
         method: "DELETE",
       });
       const data = await res.json();
@@ -92,9 +92,6 @@ export default function CartItem({
                   </div>
                 )}
               </div>
-              <p className="text-sm font-medium text-gray-900">
-                Qty. {bookQuantity}
-              </p>
               <div className="flex">
                 <p className="text-sm font-medium text-green-700">
                   {" "}
@@ -112,20 +109,9 @@ export default function CartItem({
       </li>
       <div className="mb-2 flex">
         <div className="min-w-24 flex">
-          <button type="button" className="h-7 w-7">
-            -
-          </button>
-          <input
-            type="text"
-            className="mx-1 h-7 w-9 rounded-md border text-center"
-            defaultValue={1}
-          />
-          <button
-            type="button"
-            className="flex h-7 w-7 items-center justify-center"
-          >
-            +
-          </button>
+          <p className="text-sm font-medium text-gray-900">
+            Qty: {bookQuantity}
+          </p>
         </div>
         <div className="ml-6 flex text-sm">
           <button
