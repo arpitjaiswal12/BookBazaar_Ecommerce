@@ -94,7 +94,7 @@ export default function Home() {
                 Recent offers
               </h2>
               <Link
-                className="text-sm text-blue-800 hover:underline"
+                className="text-sm font-bold text-blue-800 hover:underline"
                 to={"/search?offer=true"}
               >
                 Show more offers

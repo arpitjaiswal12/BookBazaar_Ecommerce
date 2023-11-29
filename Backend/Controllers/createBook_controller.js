@@ -88,7 +88,7 @@ export const getBooks = async (req, res, next) => {
 
     const books = await Bookdetail.find({
       bookName: { $regex: searchTerm, $options: "i" }, // here regex serach the anywhere in the books and option means don't care about and small/capital letters
-      // category : { $regex: searchTerm, $options: 'i' }
+      // category : { $regex: searchTerm, $options: 'i' },
       offer,
       type,
     })
@@ -96,6 +96,7 @@ export const getBooks = async (req, res, next) => {
       .limit(limit)
       .skip(startIndex);
     return res.status(200).json(books);
+    
   } catch (error) {
     next(error);
   }
