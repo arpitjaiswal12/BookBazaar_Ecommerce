@@ -93,7 +93,7 @@ const HeaderBottom = () => {
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="absolute lg:top-28 sm:top-40 z-50 bg-primeColor w-auto text-[#767676] h-auto p-1 pb-4"
+                className="absolute top-32 sm:top-40 z-50 bg-primeColor w-auto text-[#767676] h-auto p-1 pb-4"
               >
                 <li className="text-gray-900 font-semibold  px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-green-700 hover:text-green-800 duration-300 cursor-pointer">
                   <a href="#">Novel Book</a>
