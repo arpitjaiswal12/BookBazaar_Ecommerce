@@ -17,7 +17,8 @@ import Contact from './pages/Contact'
 import SuccessBanner from './Components/SuccessBanner'
 import AlertBanner from './Components/AlertBanner'
 import HeaderBottom from './Components/HeaderBottom'
-
+import Footer from './Components/Footer'
+import { CheckOut } from './pages/CheckOut'
 
 
 function App() {
@@ -46,10 +47,13 @@ function App() {
       <Route path='/contact'  element={<Contact/>}/>
       <Route path='/contact/success/banner' element={<SuccessBanner/>}/>
       <Route path='/contact/alert/banner' element={<AlertBanner/>}/>
+      <Route path='/checkout' element={<CheckOut/>}/>
+      
       
 
     </Routes>
     {/* <Dropdown/> */}
+    <Footer/>
     </BrowserRouter>
     
   )
