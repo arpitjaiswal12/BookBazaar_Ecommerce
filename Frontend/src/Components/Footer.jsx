@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 export default function Footer() {
   return (
     <section className="relative overflow-hidden py-10">
+      <div className=" h-48"></div>
       <div className="relative z-10 mx-auto max-w-7xl px-4">
         <div className="-m-6 flex flex-wrap">
           <div className="w-full p-6 md:w-1/2 lg:w-5/12">

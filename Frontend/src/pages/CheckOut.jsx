@@ -1,5 +1,6 @@
 import React from 'react'
 import { Home, ChevronRight, ShoppingCart } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const steps = ['Personal Information', 'Payment Method', 'Confirmation']
 
@@ -16,7 +17,7 @@ export function CheckOut() {
                 className="ml-1 inline-flex text-sm font-medium text-gray-900 hover:underline md:ml-2"
               >
                 <Home size={16} className="mr-2 text-gray-900" />
-                Cart
+                <Link to="/view-cart">Cart</Link>
               </a>
             </li>
             {steps.map((step) => (
@@ -42,7 +43,7 @@ export function CheckOut() {
             </div>
             <div className="flex flex-1">
               <p className="text-sm font-medium">
-                You have <strong>4</strong> items in cart. Sub total is <strong>₹10,000</strong>
+                {/* You have <strong>4</strong> items in cart. Sub total is <strong>₹10,000</strong> */}
               </p>
             </div>
             <button

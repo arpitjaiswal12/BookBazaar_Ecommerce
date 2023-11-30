@@ -62,7 +62,7 @@ export default function Search() {
       {showMore && (
         <p
           onClick={onShowMoreClick}
-          className="text-blue-700 cursor-pointer hover:underline w-full"
+          className="text-blue-700 cursor-pointer hover:underline w-full text-xl"
         >
           Show more
         </p>
