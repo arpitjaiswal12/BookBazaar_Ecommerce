@@ -67,7 +67,7 @@ export default function UserBook() {
       const data = await res.json();
       console.log(data);
       setLoading(false);
-      alert("Item is Added to card !! view card to see your item ")
+      alert("Item is Added to cart !! view cart to see your item ")
       // navigate(`/view-cart`)
       if (data.success === false) {
         setError(data.message);

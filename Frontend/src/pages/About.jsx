@@ -37,12 +37,12 @@ export default function About() {
               </h1>
             </div>
             <p class="mb-6 text-base leading-7 text-gray-600 dark:text-gray-700">
-              At BookBuy, we value the connections we build with our readers,
+              At BookBazaar, we value the connections we build with our readers,
               and your thoughts, questions, and suggestions are incredibly
               important to us. Whether you're seeking assistance, want to share
               a book recommendation, or simply wish to engage in a literary
               conversation, our virtual doors are wide open. Your feedback fuels
-              our passion for making BookBuy the best it can be. If you have a
+              our passion for making BookBazaar the best it can be. If you have a
               specific inquiry, feel free to use our online inquiry form, and
               we'll ensure a swift and thorough response. Let's keep the
               conversation going and continue this exciting literary journey

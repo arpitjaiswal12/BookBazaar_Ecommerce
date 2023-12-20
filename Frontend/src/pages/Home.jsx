@@ -86,7 +86,7 @@ export default function Home() {
 
       {/* Book results for offer,rent and sell */}
 
-      <div className="p-3 border-2 border-black flex flex-col items-center md:items-center gap-8 my-10">
+      <div className="p-3 flex flex-col items-center md:items-center gap-8 my-10">
         {offerBooks && offerBooks.length > 0 && (
           <div className="">
             <div className="my-3">
