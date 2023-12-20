@@ -74,7 +74,7 @@ export default function Contact() {
         </p>
         <p className="mx-auto max-w-4xl text-center text-base text-gray-600 md:text-xl">
           Your feedback is invaluable to us, and we're committed to ensuring
-          your BookBuy experience exceeds your expectations. Reach out, and
+          your BookBazaar experience exceeds your expectations. Reach out, and
           let's continue this literary journey together! ✉️
         </p>
       </div>

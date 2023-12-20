@@ -86,7 +86,7 @@ export default function Home() {
 
       {/* Book results for offer,rent and sell */}
 
-      <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10">
+      <div className="p-3 flex flex-col items-center md:items-center gap-8 my-10">
         {offerBooks && offerBooks.length > 0 && (
           <div className="">
             <div className="my-3">
@@ -100,7 +100,7 @@ export default function Home() {
                 Show more offers
               </Link>
             </div>
-            <div className="flex flex-wrap md:flex-nowrap gap-8">
+            <div className="flex flex-wrap md:flex-wrap gap-8">
               {offerBooks.map((book) => (
                 // <bookItem book={book} key={book._id} />
                 <BookCard book={book} key={book._id} />
@@ -115,13 +115,13 @@ export default function Home() {
                 Recent books for rent
               </h2>
               <Link
-                className="text-sm text-blue-800 hover:underline"
+                className="text-sm font-bold text-blue-800 hover:underline"
                 to={"/search?type=rent"}
               >
                 Show more books for rent
               </Link>
             </div>
-            <div className="flex flex-wrap md:flex-nowrap gap-8">
+            <div className="flex flex-wrap md:flex-wrap gap-8">
               {rentBooks.map((book) => (
                 <BookCard book={book} key={book._id} />
               ))}
@@ -135,13 +135,13 @@ export default function Home() {
                 Recent books for sale
               </h2>
               <Link
-                className="text-sm text-blue-800 hover:underline"
+                className="text-sm font-bold text-blue-800 hover:underline"
                 to={"/search?type=sale"}
               >
                 Show more books for sale
               </Link>
             </div>
-            <div className="flex flex-wrap md:flex-nowrap gap-8">
+            <div className="flex flex-wrap md:flex-wrap gap-8">
               {saleBooks.map((book) => (
                 <BookCard book={book} key={book._id} />
               ))}
@@ -149,6 +149,7 @@ export default function Home() {
           </div>
         )}
       </div>
+
     </div>
   );
 }

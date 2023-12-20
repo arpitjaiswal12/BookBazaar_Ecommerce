@@ -19,7 +19,7 @@ export default function Footer() {
                   Home.
                 </p>
                 <p className="text-sm text-gray-600">
-                  &copy; Copyright 2023. All Rights Reserved by DevUI.
+                  &copy; Copyright 2023. All Rights Reserved by DeveloperAJ.
                 </p>
               </div>
             </div>
