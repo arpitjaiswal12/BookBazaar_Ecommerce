@@ -40,6 +40,7 @@ export default function CartItem({
     } catch (error) {
       console.log(error.message);
     }
+    window.location.reload();
   };
 
   return (
