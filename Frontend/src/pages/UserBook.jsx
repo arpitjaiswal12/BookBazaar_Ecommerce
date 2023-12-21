@@ -31,7 +31,7 @@ export default function UserBook() {
     category: "",
     offer: false,
     imageUrls: [],
-    userRef:"",
+    userRef: "",
   });
 
   const handleAddToCart = async (e) => {
@@ -50,7 +50,7 @@ export default function UserBook() {
           ...cartItemData,
           userRef: currentUser._id,
           bookName: book.bookName,
-          authorName:book.authorName,
+          authorName: book.authorName,
           pickUpAddress: book.address,
           deliveryAddress: "none",
           sellerName: book.sellerName,
@@ -61,18 +61,17 @@ export default function UserBook() {
           category: book.category,
           offer: book.offer,
           imageUrls: book.imageUrls[0],
-          userRef: currentUser._id
+          userRef: currentUser._id,
         }),
       });
       const data = await res.json();
       console.log(data);
       setLoading(false);
-      alert("Item is Added to cart !! view cart to see your item ")
+      alert("Item is Added to cart !! view cart to see your item ");
       // navigate(`/view-cart`)
       if (data.success === false) {
         setError(data.message);
       }
-      
     } catch (error) {
       setError(error.message);
       setLoading(false);
@@ -207,23 +206,25 @@ export default function UserBook() {
                       }
                     }}
                   </div>
-                  {currentUser && (
+                  {(currentUser && (
                     <button
-                    type="button"
-                    className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                    onClick={handleAddToCart}
-                  >
-                    Add to Cart
-                  </button>
-                  ) || (
+                      type="button"
+                      className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                      onClick={handleAddToCart}
+                    >
+                      Add to Cart
+                    </button>
+                  )) || (
                     <button
-                    type="button"
-                    className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                  >
-                    Please Login to add item to Cart
-                  </button>
-                  ) }
-                  
+                      type="button"
+                      className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                      onClick={() => {
+                        alert("Please Login to add item ");
+                      }}
+                    >
+                      Add to Cart
+                    </button>
+                  )}
                 </div>
                 <p className="text-lg font-medium text-red-700">
                   {" "}

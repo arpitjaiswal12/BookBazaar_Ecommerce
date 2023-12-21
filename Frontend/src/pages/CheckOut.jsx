@@ -1,8 +1,8 @@
-import React from 'react'
-import { Home, ChevronRight, ShoppingCart } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Home, ChevronRight, ShoppingCart } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const steps = ['Personal Information', 'Payment Method', 'Confirmation']
+const steps = ["Personal Information", "Payment Method", "Confirmation"];
 
 export function CheckOut() {
   return (
@@ -50,7 +50,7 @@ export function CheckOut() {
               type="button"
               className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
             >
-              View Items
+              <Link to={"/view-cart"}>View Items</Link>
             </button>
           </div>
           <p className="text-sm font-bold text-gray-900">Personal Info</p>
@@ -129,5 +129,5 @@ export function CheckOut() {
         </div>
       </div>
     </div>
-  )
+  );
 }

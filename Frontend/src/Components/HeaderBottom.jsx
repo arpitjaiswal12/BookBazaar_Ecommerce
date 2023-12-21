@@ -32,8 +32,6 @@ const HeaderBottom = () => {
     handleShowCartItem();
   });
 
-
-
   const [show, setShow] = useState(false);
   const [showUser, setShowUser] = useState(false);
   const navigate = useNavigate();
@@ -74,7 +72,6 @@ const HeaderBottom = () => {
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
-
 
   return (
     <div className="w-full bg-gray-50 relative">
@@ -131,9 +128,11 @@ const HeaderBottom = () => {
             <Link to="/view-cart">
               <div className="relative">
                 <FaShoppingCart />
-                <span className="absolute bg-red-300 font-titleFont font-bold bottom-3 -right-3.5 text-xs w-4 h-4 flex items-center justify-center rounded-full bg-primeColor text-red-700">
-                  {userBooks.length > 0 ? userBooks.length : 0}
-                </span>
+                {userBooks.length > 0 && (
+                  <span className="absolute bg-red-300 font-titleFont font-bold bottom-3 -right-3.5 text-xs w-4 h-4 flex items-center justify-center rounded-full bg-primeColor text-red-700">
+                    {userBooks.length}
+                  </span>
+                )}
               </div>
             </Link>
           </div>
