@@ -15,6 +15,11 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
+// Hide Show password in react
+import { Icon } from "react-icons-kit";
+import { eyeOff } from "react-icons-kit/feather/eyeOff";
+import { eye } from "react-icons-kit/feather/eye";
+
 export default function Profile() {
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({});
@@ -22,6 +27,22 @@ export default function Profile() {
   const dispatch = useDispatch();
   const [showBooksError, setShowBooksError] = useState(false);
   const [userBooks, setUserBooks] = useState([]);
+
+
+    // password show and hide
+    const [password, setPassword] = useState("");
+    const [type, setType] = useState("password");
+    const [icon, setIcon] = useState(eyeOff);
+  
+    const handleToggle = () => {
+      if (type === "password") {
+        setIcon(eye);
+        setType("text");
+      } else {
+        setIcon(eyeOff);
+        setType("password");
+      }
+    };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -170,13 +191,19 @@ export default function Profile() {
           className="border p-3 rounded-lg"
           onChange={handleChange}
         />
-        <input
-          type="password"
-          placeholder="password"
-          id="password"
-          className="border p-3 rounded-lg"
-          onChange={handleChange}
-        />
+        <div className="mb-4 flex">
+          <input
+            type={type}
+            name="password"
+            placeholder="password"
+            className="border p-3 rounded-lg w-full"
+            id="password"
+            onChange={handleChange}
+          />
+          <span class="flex justify-around items-center" onClick={handleToggle}>
+            <Icon class="absolute cursor-pointer mr-10" icon={icon} size={20} />
+          </span>
+        </div>
         <button
           disabled={loading}
           className="bg-green-800 text-white font-medium rounded-lg p-3 uppercase hover:opacity-90 disabled:opacity-80"
