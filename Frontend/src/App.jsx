@@ -34,7 +34,7 @@ function App() {
         <Route path="/book/:bookId" element={<UserBook />} />
         {/* <Route path='/search' element={<Search/>} /> */}
         {["/search", "/shop"].map((path) => (
-          <Route path={path} key element={<Search />} />
+          <Route path={path} key={path} element={<Search />} />
         ))}{" "}
         {/*Multiple path of single component*/}
         <Route element={<PrivateRoute />}>
