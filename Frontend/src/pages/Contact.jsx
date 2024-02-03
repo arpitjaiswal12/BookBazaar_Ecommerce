@@ -47,7 +47,7 @@ export default function Contact() {
         }),
       });
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
       setLoading(false);
       if (data.success === false) {
         setError(data.message);

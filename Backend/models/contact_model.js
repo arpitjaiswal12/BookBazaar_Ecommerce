@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 const contactSchema = new mongoose.Schema(
   {
@@ -13,21 +13,23 @@ const contactSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      unique: true,
     },
-    phoneNumber:{
+    phoneNumber: {
       type: String,
-      unique:true,
       maxLength: 10,
     },
-    message:{
-        type:String,
-        required:true,
+    message: {
+      type: String,
+      required: true, 
+      
     },
   },
   { timestamps: true }
 );
 
+// contactSchema.index({ firstName: 1, lastName: 1, message: 1 }, { unique: false });
 
-const ContactUser = mongoose.model('ContactUser', contactSchema);
+// contactSchema.set('autoIndex', false);
+
+const ContactUser = mongoose.model("ContactUser", contactSchema);
 export default ContactUser;

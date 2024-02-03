@@ -62,9 +62,18 @@ export const getUserBooks = async (req, res, next) => {
 
 export const ContactAdmin = async (req, res, next) => {
     try {
-      const contactdetail = await ContactUser.create(req.body);
-      return res.status(201).json(contactdetail);
+      const {firstName,lastName,email,phoneNumber,message}=req.body;
+      const newContact=new ContactUser({firstName,lastName,email,phoneNumber,message});
+      try {
+        await newContact.save();
+        res.status(201).json("Contact to admin successfull !")
+      } catch (error) {
+        next(error)
+      }
     } catch (error) {
-      next(error);
+      return req.status(500).json({
+        error: "Error while adding contact"
+      });
+      console.log(error);
     }
 };
