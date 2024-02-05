@@ -183,7 +183,7 @@ export default function Header() {
                     <Link to="/profile">
               {currentUser ? ( // profile image
                 <img
-                  className="rounded-full h-7 w-7 object-cover"
+                  className="rounded-full h-7 w-7 object-cover mt-4"
                   src={currentUser.avatar}
                   alt="profile"
                 />
@@ -209,11 +209,11 @@ export default function Header() {
                           transition={{ duration: 0.4 }}
                           className="text-sm flex flex-col gap-1"
                         >
-                          <li className="headerSedenavLi">Novel Book</li>
-                          <li className="headerSedenavLi">Self-Help Book</li>
-                          <li className="headerSedenavLi">Poetry Book</li>
-                          <li className="headerSedenavLi">Text Book</li>
-                          <li className="headerSedenavLi">Reference Book</li>
+                          <li className="headerSedenavLi"><Link to="/search?searchTerm=&category=Novel Book">Novel Book</Link></li>
+                          <li className="headerSedenavLi"><Link to="/search?searchTerm=&category=self-help book">Self-Help Book</Link></li>
+                          <li className="headerSedenavLi"><Link to="/search?searchTerm=&category=poetry book">Poetry Book</Link></li>
+                          <li className="headerSedenavLi"><Link to="/search?searchTerm=&category=text book">Text Book</Link></li>
+                          <li className="headerSedenavLi"><Link to="/search?searchTerm=&category=reference book">Reference Book</Link></li>
                         </motion.ul>
                       )}
                     </div>

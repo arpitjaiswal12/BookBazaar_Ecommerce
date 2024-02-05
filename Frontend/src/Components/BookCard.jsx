@@ -88,6 +88,9 @@ export default function BookCard({ book }) {
             <h2 className="text-sm font-semibold tracking-widest text-gray-500 line-clamp-2">
               {book.authorName}
             </h2>
+            <h2 className="text-sm font-semibold tracking-widest text-gray-500 line-clamp-2">
+              {book.category}
+            </h2>
             <p className="mt-3 text-sm text-gray-600 line-clamp-2">
               {book.description}
             </p>

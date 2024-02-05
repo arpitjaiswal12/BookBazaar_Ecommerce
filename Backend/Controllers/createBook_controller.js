@@ -81,16 +81,23 @@ export const getBooks = async (req, res, next) => {
     }
 
     const searchTerm = req.query.searchTerm || "";
+    const category = req.query.category || "";
 
     const sort = req.query.sort || "createdAt";
 
     const order = req.query.order || "desc";
 
     const books = await Bookdetail.find({
-      bookName: { $regex: searchTerm, $options: "i" }, // here regex serach the anywhere in the books and option means don't care about and small/capital letters
-      // category : { $regex: searchTerm, $options: 'i' },
-      offer,
-      type,
+      // bookName: { $regex: searchTerm, $options: "i" }, // here regex serach the anywhere in the books and option means don't care about and small/capital letters
+      // // category : { $regex: searchTerm, $options: 'i' },
+      // offer,
+      // type,
+      $and: [
+        { bookName: { $regex: searchTerm, $options: "i" } },
+        { category: { $regex: category, $options: "i" } }, // Add this line for category
+        { offer },
+        { type },
+      ],
     })
       .sort({ [sort]: order })
       .limit(limit)
