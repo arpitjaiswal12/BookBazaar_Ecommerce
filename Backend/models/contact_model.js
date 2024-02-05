@@ -5,10 +5,12 @@ const contactSchema = new mongoose.Schema(
     firstName: {
       type: String,
       required: true,
+      unique:false,
     },
     lastName: {
       type: String,
       required: true,
+      unique:false,
     },
     email: {
       type: String,
@@ -23,6 +25,7 @@ const contactSchema = new mongoose.Schema(
     message:{
         type:String,
         required:true,
+        unique:false,
     },
   },
   { timestamps: true }
