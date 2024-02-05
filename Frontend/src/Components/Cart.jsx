@@ -13,6 +13,7 @@ export default function Cart() {
   const dispatch = useDispatch();
   const [showBooksError, setShowBooksError] = useState(false);
   const [userBooks, setUserBooks] = useState([]);
+
   const handleShowCartItem = async () => {
     try {
       setShowBooksError(false);
@@ -104,6 +105,7 @@ export default function Cart() {
                     bookOffer={book.offer}
                     bookId={book._id}
                     bookType={book.type}
+                    key={book._id}
                   />
                 ))}
               </ul>

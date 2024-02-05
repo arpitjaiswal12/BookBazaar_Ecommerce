@@ -9,12 +9,12 @@ import { Navigation } from "swiper/modules";
 import "swiper/css/bundle";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
+import { checkTargetForNewValues } from "framer-motion";
 
 export default function UserBook() {
   const [book, setBook] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
 
@@ -32,7 +32,34 @@ export default function UserBook() {
     offer: false,
     imageUrls: [],
     userRef: "",
+    actual_bookId: "",
   });
+
+  
+
+
+  useEffect(() => {
+    const fetchBook = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch(`/api/book/get/${params.bookId}`);
+        const data = await res.json();
+        console.log(data);
+        if (data.success === false) {
+          setError(true);
+          setLoading(false);
+          return;
+        }
+        setBook(data);
+        setLoading(false);
+        setError(false);
+      } catch (error) {
+        setError(true);
+        setLoading(false);
+      }
+    };
+    fetchBook();
+  }, [params.bookId]);
 
   const handleAddToCart = async (e) => {
     e.preventDefault();
@@ -61,13 +88,14 @@ export default function UserBook() {
           category: book.category,
           offer: book.offer,
           imageUrls: book.imageUrls[0],
-          userRef: currentUser._id,
+          actual_bookId:book._id,
         }),
       });
       const data = await res.json();
       console.log(data);
       setLoading(false);
       alert("Item is Added to cart !! view cart to see your item ");
+      // setBookId(book._id)
       // navigate(`/view-cart`)
       if (data.success === false) {
         setError(data.message);
@@ -78,34 +106,12 @@ export default function UserBook() {
     }
   };
 
-  useEffect(() => {
-    const fetchBook = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch(`/api/book/get/${params.bookId}`);
-        const data = await res.json();
-        console.log(data);
-        if (data.success === false) {
-          setError(true);
-          setLoading(false);
-          return;
-        }
-        setBook(data);
-        setLoading(false);
-        setError(false);
-      } catch (error) {
-        setError(true);
-        setLoading(false);
-      }
-    };
-    fetchBook();
-  }, [params.bookId]);
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  console.log(book);
+  // console.log(book);
   // console.log(book.bookName);
   // console.log(book.type);
   return (

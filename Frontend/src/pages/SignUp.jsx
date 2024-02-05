@@ -89,8 +89,8 @@ export default function SignUp() {
             id="password"
             onChange={handleChange}
           />
-          <span class="flex justify-around items-center" onClick={handleToggle}>
-            <Icon class="absolute cursor-pointer mr-10" icon={icon} size={20} />
+          <span className ="flex justify-around items-center" onClick={handleToggle}>
+            <Icon className="absolute cursor-pointer mr-10" icon={icon} size={20} />
           </span>
         </div>
 

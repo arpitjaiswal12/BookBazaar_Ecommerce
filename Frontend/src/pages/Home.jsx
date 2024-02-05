@@ -37,7 +37,7 @@ export default function Home() {
         const data = await res.json();
         setSellBooks(data);
       } catch (error) {
-        log(error);
+        console.log(error);
       }
     };
     fetchOfferBooks();

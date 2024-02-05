@@ -42,6 +42,7 @@ export default function CartItem({
     }
     window.location.reload();
   };
+  // console.log(bookId);
 
   return (
     <div key="" className="">

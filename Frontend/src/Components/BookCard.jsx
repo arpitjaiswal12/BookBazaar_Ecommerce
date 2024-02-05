@@ -1,6 +1,6 @@
-import React from "react";
+// import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+// import { ArrowUpRight } from "lucide-react";
 
 export default function BookCard({ book }) {
   function capitalizeFirstLetter(string) {
@@ -72,7 +72,7 @@ export default function BookCard({ book }) {
     // </div>
     <div className="bg-white hover:drop-shadow-2xl">
       <Link to={`/book/${book._id}`}>
-        <div className="w-[300px] h-full md:w-[280px] sm:w-[260px] rounded-md border hover:text-blue-500">
+        <div className="w-[400px] h-full md:w-[280px] sm:w-[260px] rounded-md border hover:text-blue-500">
           <img
             src={
               book.imageUrls[0] ||
