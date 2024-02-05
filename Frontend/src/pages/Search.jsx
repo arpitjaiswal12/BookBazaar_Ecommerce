@@ -14,8 +14,10 @@ export default function Search() {
     const fetchBooks = async () => {
       setLoading(true);
       setShowMore(false);
-      const searchQuery = urlParams.toString();
-      const res = await fetch(`/api/book/get?${searchQuery}`);
+      // const searchQuery = urlParams.toString();
+      const searchTerm = urlParams.get("searchTerm") || "";
+      const category = urlParams.get("category") || "";
+      const res = await fetch(`/api/book/get?searchTerm=${searchTerm}&category=${category}`);
       const data = await res.json();
 
       if (data.length > 11) {
@@ -37,8 +39,12 @@ export default function Search() {
     const startIndex = numberOfBooks;
     const urlParams = new URLSearchParams(location.search);
     urlParams.set("startIndex", startIndex);
-    const searchQuery = urlParams.toString();
-    const res = await fetch(`/api/book/get?${searchQuery}`);
+
+    const searchTerm = urlParams.get("searchTerm") || "";
+    const category = urlParams.get("category") || "";
+
+    // const searchQuery = urlParams.toString();
+    const res = await fetch(`/api/book/get?searchTerm=${searchTerm}&category=${category}&startIndex=${startIndex}`);
     const data = await res.json();
     if (data.length < 12) {
       setShowMore(false);

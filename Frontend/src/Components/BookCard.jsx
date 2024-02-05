@@ -83,10 +83,13 @@ export default function BookCard({ book }) {
           />
           <div className="p-4">
             <h1 className=" items-center text-lg font-semibold line-clamp-2">
-              {book.bookName}
+              {book.bookName} 
             </h1>
             <h2 className="text-sm font-semibold tracking-widest text-gray-500 line-clamp-2">
               {book.authorName}
+            </h2>
+            <h2 className="text-sm font-semibold tracking-widest text-gray-500 line-clamp-2">
+              {book.category}
             </h2>
             <p className="mt-3 text-sm text-gray-600 line-clamp-2">
               {book.description}

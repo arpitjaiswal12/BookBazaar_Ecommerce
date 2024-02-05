@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 import { FaSearch, FaUser, FaCaretDown, FaShoppingCart } from "react-icons/fa";
-
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -49,10 +48,12 @@ const HeaderBottom = () => {
 
   const { currentUser } = useSelector((state) => state.user);
   const [searchTerm, setSearchTerm] = useState("");
+  const [category, setCategory] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(window.location.search);
     urlParams.set("searchTerm", searchTerm);
+    urlParams.set("category", category);
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
   };
@@ -93,20 +94,20 @@ const HeaderBottom = () => {
                 className="absolute top-32 sm:top-40 z-50 bg-primeColor w-auto text-[#767676] h-auto p-1 pb-4"
               >
                 <li className="text-gray-900 font-semibold  px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-green-700 hover:text-green-800 duration-300 cursor-pointer">
-                  <a href="#">Novel Book</a>
+                  <Link to="/search?searchTerm=&category=novel book">Novel Book</Link>
                 </li>
 
                 <li className="text-gray-900 font-semibold  px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-green-700 hover:text-green-700 cursor-pointer">
-                  <a href="#"> Self-Help Book</a>
+                  <Link to="/search?searchTerm=&category=self-help book"> Self-Help Book</Link>
                 </li>
                 <li className="text-gray-900 font-semibold  px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-green-700 hover:text-green-800 cursor-pointer">
-                  <a href="#">Poetry Book</a>
+                  <Link to="/search?searchTerm=&category=poetry book">Poetry Book</Link>
                 </li>
                 <li className="text-gray-900 font-semibold  px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-green-700 hover:text-green-800 cursor-pointer">
-                  <a>Text Book</a>
+                  <Link to="/search?searchTerm=&category=Text Book">Text Book</Link>
                 </li>
                 <li className="text-gray-900 font-semibold px-4 py-1 border-b-[1px] border-b-gray-400  hover:border-b-green-700 hover:text-green-800 cursor-pointer">
-                  <a>Reference Book</a>
+                  <Link to="/search?searchTerm=&category=Reference Book">Reference Book</Link>
                 </li>
               </motion.ul>
             )}
