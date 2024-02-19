@@ -32,6 +32,7 @@ export default function UserBook() {
     offer: false,
     imageUrls: [],
     userRef: "",
+    actual_bookId: "",
   });
 
   const handleAddToCart = async (e) => {
@@ -61,7 +62,7 @@ export default function UserBook() {
           category: book.category,
           offer: book.offer,
           imageUrls: book.imageUrls[0],
-          userRef: currentUser._id,
+          actual_bookId:book._id,
         }),
       });
       const data = await res.json();
