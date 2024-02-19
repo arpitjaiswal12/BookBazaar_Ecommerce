@@ -54,6 +54,10 @@ const CartItemSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    actual_bookId:{
+      type:String,
+      required:true,
+    }
   },
   { timestamps: true }
 );
