@@ -102,7 +102,7 @@ export default function Cart() {
                     bookDiscountPrice={book.offer && book.discountPrice}
                     bookQuantity={1}
                     bookOffer={book.offer}
-                    bookId={book._id}
+                    bookId={book.actual_bookId}
                     bookType={book.type}
                   />
                 ))}
