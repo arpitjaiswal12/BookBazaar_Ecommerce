@@ -39,6 +39,10 @@ app.listen(3000, () => {
   console.log("Server is running at 3000 ");
 });
 
+app.get("/",(req,res)=>{
+  res.send("<h1>Backend of BookBazaar</h1>")
+})
+
 // create a middleware function to handle possible error
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
