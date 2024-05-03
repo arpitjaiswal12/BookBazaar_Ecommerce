@@ -1,13 +1,13 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import dbConnect from "../config/database.js";
+import dbConnect from "../src/config/database.js";
 import cookieParser from "cookie-parser";
-import authRoute from "../routes/auth_route.js";
-import userRoute from "../routes/user_route.js";
-import createBookRoute from "../routes/createBook_route.js";
+import authRoute from "../src/routes/auth_route.js";
+import userRoute from "../src/routes/user_route.js";
+import createBookRoute from "../src/routes/createBook_route.js";
 // import contactAdmin from "./routes/contact_route.js"
-import cartRoute from "../routes/addToCart_route.js";
+import cartRoute from "../src/routes/addToCart_route.js";
 import path from "path";
 
 dotenv.config();
